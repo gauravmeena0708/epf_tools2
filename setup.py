@@ -4,7 +4,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='EPF tools2',
+    name='EPFtools2',
     author='gaurav meena',
     author_email='gauravmeena0708@gmail.com',
     description='Example PyPI (Python Package Index) Package',
@@ -14,7 +14,7 @@ setuptools.setup(
     url='https://github.com/gauravmeena0708/epf_tools2',
     project_urls={
         'Documentation': 'https://github.com/gauravmeena0708/epf_tools2',
-        'Bug Reports': 'https://github.com/gauravmeena0708/epf_tools2issues',
+        'Bug Reports': 'https://github.com/gauravmeena0708/epf_tools2/issues',
         'Source Code': 'https://github.com/gauravmeena0708/epf_tools2',
         # 'Funding': '',
         # 'Say Thanks!': '',
