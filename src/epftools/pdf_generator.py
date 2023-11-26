@@ -42,7 +42,7 @@ class PDFGenerator:
         ])
 
         # Create a table with the DataFrame
-        table = Table(data)
+        table = Table(data, hAlign='LEFT')
         table.setStyle(table_style)
 
         """max_value = 88
