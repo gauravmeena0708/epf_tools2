@@ -61,7 +61,7 @@ class PDFGenerator:
             pagesize=A4,
             title="Report", #exchange with your title
             author="EPF Tools", #exchange with your authors name
-            subject"pdf via reportlab" #exchange with your subject
+            subject="pdf via reportlab" #exchange with your subject
         )
         elements = []
         space = Spacer(width=0, height=7)
