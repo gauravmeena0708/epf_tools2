@@ -1,6 +1,6 @@
 # Example PyPI (Python Package Index) Package & Tutorial / Instruction / Workflow for 2021
 
-[![PyPI package](https://img.shields.io/badge/pip%20install-epftools2-brightgreen)](https://pypi.org/project/example-pypi-package/) [![version number](https://img.shields.io/pypi/v/epftools2?color=green&label=version)](https://github.com/gauravmeena0708/epf_tools2/releases) [![Actions Status](https://github.com/gauravmeena0708/epf_tools2/workflows/Test/badge.svg)](https://github.com/gauravmeena0708/epf_tools2/actions) [![License](https://img.shields.io/github/license/gauravmeena0708/epf_tools2)](https://github.com/gauravmeena0708/epf_tools2/blob/main/LICENSE)
+[![PyPI package](https://img.shields.io/badge/pip%20install-epftools2-brightgreen)](https://pypi.org/project/example-pypi-package/) [Releases](https://github.com/gauravmeena0708/epf_tools2/releases) [![Actions Status](https://github.com/gauravmeena0708/epf_tools2/workflows/Test/badge.svg)](https://github.com/gauravmeena0708/epf_tools2/actions) [![License](https://img.shields.io/github/license/gauravmeena0708/epf_tools2)](https://github.com/gauravmeena0708/epf_tools2/blob/main/LICENSE)
 
 This is an alpha repo for EPF analysis tools
 
