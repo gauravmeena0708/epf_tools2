@@ -54,13 +54,13 @@ class PDFGenerator:
 
         return table
 
-    def create_pdf(self, dataframes,break=False):
+    def create_pdf(self, dataframes,with_break=False):
         doc = SimpleDocTemplate(self.pdf_file, pagesize=landscape(letter))
         elements = []
         for i, df in enumerate(dataframes):
             table = self.convert_df2table(df)
             elements.append(table)
-            if i < len(dataframes) - 1 and break:
+            if i < len(dataframes) - 1 and with_break:
                 elements.append(PageBreak())
 
         doc.build(elements)
