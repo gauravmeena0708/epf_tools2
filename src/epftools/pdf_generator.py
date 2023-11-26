@@ -31,7 +31,8 @@ class PDFGenerator:
         table_style = TableStyle([
             ('BACKGROUND', (0, 0), (-1, -1), colors.lightblue),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
-            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            #('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('ALIGN', (0, 0), (-1, -1), 'RIGHT'),
             ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica'),
             ('BOTTOMPADDING', (0, 0), (-1, 0), 5),
@@ -42,7 +43,7 @@ class PDFGenerator:
         ])
 
         # Create a table with the DataFrame
-        table = Table(data, hAlign='LEFT')
+        table = Table(data, hAlign='LEFT', colWidths=270)
         table.setStyle(table_style)
 
         """max_value = 88
