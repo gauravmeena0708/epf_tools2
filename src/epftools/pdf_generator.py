@@ -1,7 +1,7 @@
 import pandas as pd
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, PageBreak, Paragraph
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, PageBreak, Paragraph, LineBreak
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter, landscape
 
@@ -62,6 +62,7 @@ class PDFGenerator:
             table = self.convert_df2table(df)
             elements.append(table)
             elements.append(empty_line)
+            elements.append(LineBreak())
             if i < len(dataframes) - 1 and with_break:
                 elements.append(PageBreak())
 
