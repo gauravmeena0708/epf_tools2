@@ -1,7 +1,7 @@
 import pandas as pd
-from reportlab.lib.pagesizes import letter
+from reportlab.lib.pagesizes import letter, A4
 from reportlab.lib import colors
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, PageBreak, Paragraph
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, PageBreak, Paragraph, Spacer
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter, landscape
 
@@ -55,14 +55,20 @@ class PDFGenerator:
         return table
 
     def create_pdf(self, dataframes,with_break=False):
-        doc = SimpleDocTemplate(self.pdf_file, pagesize=landscape(letter))
+        #doc = SimpleDocTemplate(self.pdf_file, pagesize=landscape(letter))
+        doc = SimpleDocTemplate(
+            self.pdf_file,
+            pagesize=A4,
+            title="Report", #exchange with your title
+            author="EPF Tools", #exchange with your authors name
+            subject"pdf via reportlab" #exchange with your subject
+        )
         elements = []
-        empty_line = Paragraph("")
+        space = Spacer(width=0, height=7)
         for i, df in enumerate(dataframes):
             table = self.convert_df2table(df)
             elements.append(table)
-            elements.append(empty_line)
-            elements.append(empty_line)
+            elements.append(space)
             if i < len(dataframes) - 1 and with_break:
                 elements.append(PageBreak())
 
