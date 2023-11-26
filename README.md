@@ -1,30 +1,12 @@
 # Example PyPI (Python Package Index) Package & Tutorial / Instruction / Workflow for 2021
 
-[![PyPI package](https://img.shields.io/badge/pip%20install-example--pypi--package-brightgreen)](https://pypi.org/project/example-pypi-package/) [![version number](https://img.shields.io/pypi/v/example-pypi-package?color=green&label=version)](https://github.com/tomchen/example_pypi_package/releases) [![Actions Status](https://github.com/tomchen/example_pypi_package/workflows/Test/badge.svg)](https://github.com/tomchen/example_pypi_package/actions) [![License](https://img.shields.io/github/license/tomchen/example_pypi_package)](https://github.com/tomchen/example_pypi_package/blob/main/LICENSE)
+[![PyPI package](https://img.shields.io/badge/pip%20install-epftools2-brightgreen)](https://pypi.org/project/example-pypi-package/) [![version number](https://img.shields.io/pypi/v/epftools2?color=green&label=version)](https://github.com/gauravmeena0708/epf_tools2/releases) [![Actions Status](https://github.com/gauravmeena0708/epf_tools2/workflows/Test/badge.svg)](https://github.com/gauravmeena0708/epf_tools2/actions) [![License](https://img.shields.io/github/license/gauravmeena0708/epf_tools2)](https://github.com/gauravmeena0708/epf_tools2/blob/main/LICENSE)
 
-This is an example [PyPI](https://pypi.org/) (Python Package Index) package set up with automated tests and package publishing workflow using GitHub Actions CI/CD. It is made primarily for GitHub + VS Code (Windows / Mac / Linux) users who are about to write and publish their first PyPI package. The package could serve as a starter / boilerplate / demo and the tutorial could give you a quick and concise explaination to solve some small but annoying problems you might encounter, such as package / module name confusion, and VS Code test configuration issues.
-
-<details><summary><strong>Differences from pypa/sampleproject (click to show/hide)</strong></summary>
-
-This example package is inspired by / based on the [official sample project pypa/sampleproject](https://github.com/pypa/sampleproject), but this package:
-
-- is a simplified version of pypa/sampleproject (and the [official Python Packaging User Guide](https://packaging.python.org/))
-- uses GitHub Actions for both testing and publishing, instead of Travis CI
-- is tested when pushing `master` or `main` branch, and is published when create a release
-- includes test files in the source distribution
-- uses **setup.cfg** for [version single-sourcing](https://packaging.python.org/guides/single-sourcing-package-version/) (setuptools 46.4.0+)
-- has **.vscode\settings.json** and **vscode.env** which adds **src/** folder to `PYTHONPATH`, so that test files don't have linting errors and may run with pytest in VS Code
-- does not use flake8 for automated linting - it is sometimes too strict and inflexible, you may use pylint locally instead
-- has this tutorial that covers everything you need to know in one page. Everything that might not be very useful, is hidden in collapsible sections that you can click to show
-- has **[.editorconfig](https://editorconfig.org/#download)** file
-
-</details>
+This is an alpha repo for EPF analysis tools
 
 ## Make necessary changes
 
 ### Use as a template
-
-[![Use the template](https://img.shields.io/static/v1?label=&message=Click%20here%20to%20use%20this%20package%20as%20a%20template%20to%20start%20a%20new%20repo%20on%20GitHub&color=brightgreen&style=for-the-badge)](https://github.com/tomchen/example_pypi_package/generate)
 
 (Click the above button to use this example package as a template for your new GitHub repo, this will initialize a new repository and my commits will not be in your git history)
 
@@ -38,17 +20,6 @@ Open `example_pypi_package` folder with Visual Studio Code, <kbd>Ctrl</kbd> + <k
 
 Simply and very roughly speaking, package name is used in `pip install <PACKAGENAME>` and module name is used in `import <MODULENAME>`. Both names should consist of lowercase basic letters (a-z). They may have underscores (`_`) if you really need them. Hyphen-minus (`-`) should not be used.
 
-You'll also need to make sure the URL "https://pypi.org/project/example-pypi-package/" (replace `example-pypi-package` by your package name, with all `_` becoming `-`) is not occupied.
-
-<details><summary><strong>Details on naming convention (click to show/hide)</strong></summary>
-
-Underscores (`_`) can be used but such use is discouraged. Numbers can be used if the name does not start with a number, but such use is also discouraged.
-
-Name starting with a number and/or containing hyphen-minus (`-`) should not be used: although technically legal, such name causes a lot of trouble − users have to use `importlib` to import it.
-
-Don't be fooled by the URL "[pypi.org/project/example-pypi-package/](https://pypi.org/project/example-pypi-package/)" and the name "example-pypi-package" on pypi.org. pypi.org and pip system convert all `_` to `-` and use the latter on the website / in `pip` command, but the real name is still with `_`, which users should use when importing the package.
-
-There's also [namespace](https://packaging.python.org/guides/packaging-namespace-packages/) to use if you need sub-packages.
 
 </details>
 
