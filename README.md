@@ -10,3 +10,32 @@ This is an alpha repo for EPF analysis tools
 ```bash
 pip install -e git+https://github.com/gauravmeena0708/epf_tools2#egg=epftools2
 ```
+
+### Example Use
+
+```python
+
+import pandas as pd
+from epftools import  Claim_Category, PDFGenerator
+
+df = pd.read_csv('data/claims.csv')
+category_generator = Claim_Category(15, 20)
+df  = category_generator.add_bins_and_categories(df)
+#category_generator.get_flat_pivot(df,"GROUP ID","INT_CATEGORY")
+df.head()
+#==============================================================
+
+
+dataframes =[]
+dataframes.append(category_generator.get_flat_pivot(df,"GROUP ID","days_Group"))
+dataframes.append(category_generator.get_flat_pivot(df,"GROUP ID","STATUS"))
+dataframes.append(category_generator.get_flat_pivot(df,"GROUP ID","CATEGORY"))
+dataframes.append(category_generator.get_flat_pivot(df,"GROUP ID","CLAIM TYPE"))
+dataframes.append(category_generator.get_flat_pivot(df,"TASK ID","CATEGORY"))
+dataframes.append(category_generator.get_flat_pivot(df,"TASK ID","STATUS"))
+
+
+pdf_generator = PDFGenerator(pdf_file="data/report.pdf")
+pdf_generator.create_pdf(dataframes)
+
+```
