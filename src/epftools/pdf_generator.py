@@ -58,7 +58,7 @@ class PDFGenerator:
         #doc = SimpleDocTemplate(self.pdf_file, pagesize=landscape(letter))
         doc = SimpleDocTemplate(
             self.pdf_file,
-            pagesize=A4,
+            pagesize=landscape(A4),
             title="Report", #exchange with your title
             author="EPF Tools", #exchange with your authors name
             subject="pdf via reportlab" #exchange with your subject
