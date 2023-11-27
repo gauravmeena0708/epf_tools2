@@ -1,14 +1,14 @@
 import pandas as pd
 
 """
-from claim_category import Claim_Category
+from claim_processor import Claim_Processor
 df = pd.read_csv('claims.csv')
-category_generator = Claim_Category(15, 20)
+category_generator = Claim_Processor(15, 20)
 df  = category_generator.add_bins_and_categories(df)
 #category_generator.get_flat_pivot(df,"GROUP ID","INT_CATEGORY")
 df.head()
 """
-class Claim_Category:
+class Claim_Processor:
     STATUS_MAPPING  = {
         'Pending at DA Accounts'                          : 'DA',
         'Pending at DA Accounts [EDIT]'                   : 'DA',
