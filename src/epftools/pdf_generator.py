@@ -46,12 +46,6 @@ class PDFGenerator:
         table = Table(data, hAlign='LEFT')#, colWidths=70)
         table.setStyle(table_style)
 
-        """max_value = 88
-        for row in range(1, len(data)):
-            value = data[row][1]  # Assuming 'Age' is in the second column (index 1)
-            cell_color = self.get_intensity_color(value, max_value)
-            cell_style = [('BACKGROUND', (1, row), (1, row), cell_color)]
-            table.setStyle(TableStyle(cell_style))"""
 
         return table
 
