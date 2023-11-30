@@ -45,11 +45,12 @@ pdf_generator.create_pdf(dataframes)
 ## PdfGenerator2: if wkhtmmltopdf is installed
 ```python
 
+# Example usage:
 html_template_path = 'data/template.html'
 output_pdf_path = 'data/out.pdf'
 wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
 
 
-pdf_generator = PdfGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_path)
+pdf_generator = PDFGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_path)
 pdf_generator.generate_pdf(dataframes)
 ```
