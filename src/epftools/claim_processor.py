@@ -22,6 +22,7 @@ class Claim_Processor:
         
         'Pending at SS/AO/AC Accounts'                    : 'App',
         'Pending [ Approver Pending ]'                    : 'App',
+
         'Pending at DA Pension [Worksheet Generation]'    : 'Other',
         'Pending at DA Pension [PPO Generation]'          : 'Other',
         'Pending at DA Pension [SC worksheet generation]' : 'Other',
