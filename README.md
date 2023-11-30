@@ -16,19 +16,22 @@ pip install -e git+https://github.com/gauravmeena0708/epf_tools2#egg=epftools2
 ```python
 
 import pandas as pd
-from epftools import  ClaimProcessor, PDFGenerator
+from epftools import  ClaimProcessor, PDFGenerator, , PDFGenerator2
 
 df = pd.read_csv('data/claims.csv')
 processor = ClaimProcessor(15, 20)
 df  = processor.add_bins_and_categories(df)
 print(df.head())
-df1 = category_generator.get_flat_pivot(df,"GROUP ID","days_Group")
-df2 = category_generator.get_flat_pivot(df,"GROUP ID","STATUS")
-df3 = category_generator.get_flat_pivot(df,"GROUP ID","CATEGORY")
-df4 = category_generator.get_flat_pivot(df,"GROUP ID","CLAIM TYPE")
-df5 = category_generator.get_flat_pivot(df,"TASK ID","CATEGORY")
-df6 = category_generator.get_flat_pivot(df,"TASK ID","STATUS")
-#dataframes =[df1,df2,df3,df4,df5,df6]
+```
+
+```python
+df1 = processor.get_flat_pivot(df,"GROUP ID","days_Group")
+df2 = processor.get_flat_pivot(df,"GROUP ID","STATUS")
+df3 = processor.get_flat_pivot(df,"GROUP ID","CATEGORY")
+df4 = processor.get_flat_pivot(df,"GROUP ID","CLAIM TYPE")
+df5 = processor.get_flat_pivot(df,"TASK ID","CATEGORY")
+df6 = processor.get_flat_pivot(df,"TASK ID","STATUS")
+dataframes =[df1,df2,df3,df4,df5,df6]
 ```
 
 ## PdfGenerator
@@ -47,6 +50,6 @@ output_pdf_path = 'data/out.pdf'
 wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
 
 
-pdf_generator = PdfGenerator(html_template_path, output_pdf_path, wkhtmltopdf_path)
+pdf_generator = PdfGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_path)
 pdf_generator.generate_pdf(dataframes)
 ```
