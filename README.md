@@ -11,7 +11,7 @@ This is an alpha repo for EPF analysis tools
 pip install -e git+https://github.com/gauravmeena0708/epf_tools2#egg=epftools2
 ```
 
-### Example Use
+### Example Use: Generating bins and categories and flat pivot
 
 ```python
 
@@ -19,23 +19,34 @@ import pandas as pd
 from epftools import  ClaimProcessor, PDFGenerator
 
 df = pd.read_csv('data/claims.csv')
-category_generator = ClaimProcessor(15, 20)
-df  = category_generator.add_bins_and_categories(df)
-#category_generator.get_flat_pivot(df,"GROUP ID","INT_CATEGORY")
-df.head()
-#==============================================================
+processor = ClaimProcessor(15, 20)
+df  = processor.add_bins_and_categories(df)
+print(df.head())
+df1 = category_generator.get_flat_pivot(df,"GROUP ID","days_Group")
+df2 = category_generator.get_flat_pivot(df,"GROUP ID","STATUS")
+df3 = category_generator.get_flat_pivot(df,"GROUP ID","CATEGORY")
+df4 = category_generator.get_flat_pivot(df,"GROUP ID","CLAIM TYPE")
+df5 = category_generator.get_flat_pivot(df,"TASK ID","CATEGORY")
+df6 = category_generator.get_flat_pivot(df,"TASK ID","STATUS")
+#dataframes =[df1,df2,df3,df4,df5,df6]
+```
 
+## PdfGenerator
 
-dataframes =[]
-dataframes.append(category_generator.get_flat_pivot(df,"GROUP ID","days_Group"))
-dataframes.append(category_generator.get_flat_pivot(df,"GROUP ID","STATUS"))
-dataframes.append(category_generator.get_flat_pivot(df,"GROUP ID","CATEGORY"))
-dataframes.append(category_generator.get_flat_pivot(df,"GROUP ID","CLAIM TYPE"))
-dataframes.append(category_generator.get_flat_pivot(df,"TASK ID","CATEGORY"))
-dataframes.append(category_generator.get_flat_pivot(df,"TASK ID","STATUS"))
-
+```python
 
 pdf_generator = PDFGenerator(pdf_file="data/report.pdf")
 pdf_generator.create_pdf(dataframes)
 
+```
+## PdfGenerator2: if wkhtmmltopdf is installed
+```python
+
+html_template_path = 'data/template.html'
+output_pdf_path = 'data/out.pdf'
+wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+
+
+pdf_generator = PdfGenerator(html_template_path, output_pdf_path, wkhtmltopdf_path)
+pdf_generator.generate_pdf(dataframes)
 ```
