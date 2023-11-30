@@ -136,6 +136,6 @@ class ClaimProcessor:
 
     def get_flat_pivot(self,df,INDEX,COLUMN):
         return pd.pivot_table(df, values='ID', index=[INDEX], columns=[COLUMN], 
-                             margins=True, aggfunc='count').fillna(0).astype(int).reset_index(drop=True)
+                             margins=True, aggfunc='count').fillna(0).astype(int).reset_index()
 
 
