@@ -87,6 +87,17 @@ class ClaimProcessor:
         renamed_df = filtered_df.rename(columns=self.rename_cols)
         return renamed_df
 
+    def create_labels(data, bins):
+        labels = []
+
+        for _, row in data.iterrows():
+            for j, bin_range in enumerate(bins):
+                if bin_range[0] <= row['PENDING DAYS'] <= bin_range[1]:
+                    labels.append(f'{bin_range[0]}-{bin_range[1]}')
+                    break
+
+        return labels
+    
     def assign_categories(self, row):
         days = row["days_Group"]
         status = row["STATUS"]
