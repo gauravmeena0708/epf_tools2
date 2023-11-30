@@ -8,7 +8,7 @@ df  = category_generator.add_bins_and_categories(df)
 #category_generator.get_flat_pivot(df,"GROUP ID","INT_CATEGORY")
 df.head()
 """
-class Claim_Processor:
+class ClaimProcessor:
     STATUS_MAPPING  = {
         'Pending at DA Accounts'                          : 'DA',
         'Pending at DA Accounts [EDIT]'                   : 'DA',
