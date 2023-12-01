@@ -38,10 +38,13 @@ class PDFGenerator2:
             th["style"] = "font-size:10px;padding:2px;text-align:center;"
         return str(soup)
 
-    def generate_pdf(self, dataframes):
+    def generate_pdf(self, dataframes,html=True):
         table_html = ""
         for i, df in enumerate(dataframes):
-            table_html = table_html+ "<br/><h5>Table "+str(i+1)+"</h5>" + df.to_html(classes=self.classes) + ""
+            if html:
+                table_html = table_html+ "<br/><h5>Table "+str(i+1)+"</h5>" + df.to_html(classes=self.classes) + ""
+            else:
+                table_html = table_html+ "<br/><h5>Table "+str(i+1)+"</h5>" + df + ""
         html_content = self.template % (table_html)
         modified_html = self.modify_html(html_content)
 
