@@ -47,6 +47,9 @@ class PDFGenerator2:
                 table_html = table_html+ "<br/><h5>Table "+str(i+1)+"</h5>" + df + ""
         html_content = self.template % (table_html)
         modified_html = self.modify_html(html_content)
+        html_filename = 'tmp.html'
+        with open(html_filename, "w") as f:
+            f.write(modified_html)
 
         config = pdfkit.configuration(wkhtmltopdf=self.wkhtmltopdf_path)
-        pdfkit.from_string(modified_html, self.output_path, options=self.options, configuration=config)
+        pdfkit.from_file(html_filename, self.output_path, options=self.options, configuration=config)
