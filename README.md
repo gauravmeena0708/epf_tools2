@@ -54,3 +54,32 @@ wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
 pdf_generator = PDFGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_path)
 pdf_generator.generate_pdf(dataframes)
 ```
+
+## When you need to add series of images in PDF
+```python
+from PIL import Image
+import os, re, glob, base64
+from epftools import  ClaimProcessor, PDFGenerator, PDFGenerator2
+
+def get_image_file_as_base64_data(file):
+    with open(file, 'rb') as image_file:
+        return base64.b64encode(image_file.read()).decode()
+
+directory_path = "./"
+pattern = re.compile(r"figure_\d+.png")
+all_files = os.listdir(directory_path)
+
+matching_files = [filename for filename in all_files if pattern.match(filename)]
+dataframes=[]
+for file in matching_files:
+    dataframes.append(f'<img src="data:;base64,{ get_image_file_as_base64_data(file) }">')
+
+# Example usage:
+html_template_path = 'data/template.html'
+output_pdf_path = 'data/out.pdf'
+wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+
+
+pdf_generator = PDFGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_path)
+pdf_generator.generate_pdf(dataframes, False)
+```
