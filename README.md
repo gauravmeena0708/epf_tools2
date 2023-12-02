@@ -55,8 +55,12 @@ pdf_generator = PDFGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_p
 pdf_generator.generate_pdf(dataframes)
 ```
 
+[Table Style](https://pandas.pydata.org/docs/user_guide/style.html)
+[Chart Style](https://pandas.pydata.org/docs/user_guide/visualization.html)
+
 ## When you need to add series of images in PDF
 ```python
+
 from PIL import Image
 import os, re, glob, base64
 from epftools import  ClaimProcessor, PDFGenerator, PDFGenerator2
