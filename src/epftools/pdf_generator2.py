@@ -44,7 +44,7 @@ class PDFGenerator2:
             if html:
                 table_html = table_html+ "<br/><h5>Table "+str(i+1)+"</h5>" + df.to_html(classes=self.classes) + ""
             else:
-                table_html = table_html+ "<br/><h5>Table "+str(i+1)+"</h5>" + df + ""
+                table_html = table_html+ "<br/><h5>Table "+str(i+1)+"</h5>" + df.to_html + ""
         html_content = self.template % (table_html)
         modified_html = self.modify_html(html_content)
         html_filename = 'tmp.html'
