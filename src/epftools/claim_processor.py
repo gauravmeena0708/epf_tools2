@@ -34,6 +34,32 @@ class ClaimProcessor:
         'Pending at AC Pension [SC generation]'           : 'Other',
     }
     
+    STATUS_MAPPING2  = {
+        'Pending at DA Accounts'                          : 'DA',
+        'Pending at DA Accounts [EDIT]'                   : 'DA',
+        
+        'Pending at Dispatch'                             : 'Cash/scroll/cheque',
+        'Pending at DA SCROLL'                            : 'Cash/scroll/cheque',
+        'Pending at CHEQUE Alottment/Printing'            : 'Cash/scroll/cheque',
+        
+        
+        'Pending at SS/AO/AC Accounts [Rejection]'        : 'Rejection',
+        
+        'Pending at SS/AO/AC Accounts'                    : 'App',
+        'Pending [ Approver Pending ]'                    : 'App',
+
+        'Pending at DA Pension [Worksheet Generation]'    : 'Pension',
+        'Pending at DA Pension [PPO Generation]'          : 'Pension',
+        'Pending at DA Pension [SC worksheet generation]' : 'Pension',
+        'Pending at E-Sign'                               : 'Pension',
+        'Pending at AC Pension [Worksheet Generation]'    : 'Pension',
+        'Pending at AC Pension [PPO Generation]'          : 'Pension',
+        'Pending at DA Pension [SC verification awaited]' : 'Pension',
+        'Pending at AC Pension [SC generation]'           : 'Pension',
+        'Pending at Invalid Status'                       : 'Other/Invalid',
+        'Pending [ Referred to Other Office ]'            : 'Other/Invalid',
+    }
+    
     CLAIM_TYPE_MAPPING  = {
         'Form-13 (Transfer Out) [ WITH-MONEY ]'           : 'FORM-13',
         'Form-13 (Transfer In / Same Office)'             : 'FORM-13',
@@ -73,6 +99,7 @@ class ClaimProcessor:
     
     def __init__(self, cut_off1, cut_off2):
         self.status_mapping = self.STATUS_MAPPING
+        self.status_mapping2 = self.STATUS_MAPPING2
         self.claim_type_mapping = self.CLAIM_TYPE_MAPPING
         self.int_mapping = self.INT_MAPPING
         self.cut_off1 = cut_off1
@@ -127,6 +154,7 @@ class ClaimProcessor:
         df = self.filter_and_rename_columns(df)
         df['GROUP'] = [int(str(x)[:3]) for x in df['TASK']]
         df['STATUS'] = df['STATUS'].replace(self.status_mapping)
+        df['STATUS2'] = df['STATUS'].replace(self.status_mapping2)
         df['INT_CATEGORY'] = df['CLAIM TYPE'].replace(self.int_mapping)
         df['CLAIM TYPE'] = df['CLAIM TYPE'].replace(self.claim_type_mapping)
         df['days_Group'] = pd.cut(df['PENDING DAYS'], self.days_bins, labels=self.days_labels)
