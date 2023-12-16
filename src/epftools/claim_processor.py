@@ -69,7 +69,7 @@ class ClaimProcessor:
     }
 
     COLUMNS  = ['CLAIM ID', 'TASK ID', 'PENDING DAYS', 'STATUS', 'CLAIM TYPE']
-    RENAME_COLS  = {'CLAIM ID': 'ID', 'TASK ID': 'TASK ID'}
+    RENAME_COLS  = {'CLAIM ID': 'ID', 'TASK ID': 'TASK'}
     
     def __init__(self, cut_off1, cut_off2):
         self.status_mapping = self.STATUS_MAPPING
@@ -125,7 +125,7 @@ class ClaimProcessor:
 
     def add_bins_and_categories(self, df):
         df = self.filter_and_rename_columns(df)
-        df['GROUP ID'] = [int(str(x)[:3]) for x in df['TASK ID']]
+        df['GROUP'] = [int(str(x)[:3]) for x in df['TASK']]
         df['STATUS'] = df['STATUS'].replace(self.status_mapping)
         df['INT_CATEGORY'] = df['CLAIM TYPE'].replace(self.int_mapping)
         df['CLAIM TYPE'] = df['CLAIM TYPE'].replace(self.claim_type_mapping)
