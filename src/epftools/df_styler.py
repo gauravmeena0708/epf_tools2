@@ -1,6 +1,5 @@
 import pandas as pd
-
-import pandas as pd
+import numpy as np
 
 class DataFrameStyler:
     def __init__(self, df):
