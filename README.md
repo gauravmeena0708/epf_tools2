@@ -90,7 +90,7 @@ pdf_generator.generate_pdf(dataframes, False)
 
 ## Making a stylized dataframes
 
-```
+```python
 import pandas as pd
 from epftools import  ClaimProcessor, PDFGenerator, PDFGenerator2
 
@@ -150,7 +150,7 @@ display(df1_styled)
 
 ## Coverting Stylyzed dataframes and images in pdf
 
-```
+```python
 import os, re, base64
 from epftools import  ClaimProcessor, PDFGenerator, PDFGenerator2
 
