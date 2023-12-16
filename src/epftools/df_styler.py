@@ -1,35 +1,43 @@
 import pandas as pd
 
-class DataFrameStyler:
+import pandas as pd
 
+class DataFrameStyler:
     def __init__(self, df):
         self.df = df
 
+    def highlight_min(self, color='green'):
+        is_min = self.df == self.df.min()
+        attr = 'background-color: {}'.format(color)
+        return pd.DataFrame(np.where(is_min, attr, ''), index=self.df.index, columns=self.df.columns)
+
+    def highlight_max(self, color='yellow'):
+        is_max = self.df == self.df.max()
+        attr = 'background-color: {}'.format(color)
+        return pd.DataFrame(np.where(is_max, attr, ''), index=self.df.index, columns=self.df.columns)
+
     def highlight_top3(self, color='darkorange'):
-        """Highlights the top 3 values in a Series."""
-        top3_values = self.df.nlargest(3).index
-        is_top3 = self.df.index.isin(top3_values)
-        return self.df.style.apply(lambda x: f"color: {color}; font-weight: bold;" if x in is_top3 else "", axis=1)
+        top3_values = self.df.stack().nlargest(3).index
+        is_top3 = self.df.index.isin(top3_values.get_level_values(0))
+        attr = 'color: {};font-weight: bold;'.format(color)
+        return pd.DataFrame(np.where(is_top3[:, None], attr, ''), index=self.df.index, columns=self.df.columns)
 
-    def conditional_color(self, cutoff, color='red', subset=None):
-        """Applies conditional color based on a cutoff value."""
-        if subset is None:
-            subset = pd.IndexSlice[:self.df.index.get_level_values(0).size, :]
-        return self.df.style.map(lambda x: f"color: {color}" if x > cutoff else "", subset=subset)
+    def conditional_color(self, cutoff=100, color='red'):
+        is_above_cutoff = self.df > cutoff
+        color = 'color: {};'.format(color)
+        return pd.DataFrame(np.where(is_above_cutoff, color, ''), index=self.df.index, columns=self.df.columns)
 
-    def color_quantile(self, quantile, color='khaki', subset=None):
-        """Applies color based on quantile."""
-        if subset is None:
-            subset = pd.IndexSlice[:self.df.index.get_level_values(0).size, :]
-        quantile_threshold = self.df.quantile(quantile)
-        is_in_quantile = self.df >= quantile_threshold
-        return self.df.style.apply(lambda x: f"background-color: {color}" if x >= quantile_threshold else "", subset=subset)
+    def color_quantile(self, color='red'):
+        quantile_4_threshold = self.df.quantile(0.75)
+        is_in_quantile_4 = self.df >= quantile_4_threshold
+        attr = 'background-color: {}'.format(color)
+        return pd.DataFrame(np.where(is_in_quantile_4, attr, ''), index=self.df.index, columns=self.df.columns)
 
     def get_styled_default(self):
-        """Applies default styling based on top 3 and quantile."""
-        u = self.df.index.get_level_values(0)
-        cols = self.df.columns
-        styled_df = self.style.apply(highlight_top3,color='orangered',subset = pd.IndexSlice[u[:-1], cols[:-1]],axis=1) \
-            .apply(color_quantile,color='khaki',subset = pd.IndexSlice[u[:-1], cols[:-1]],axis=1) 
-        return styled_df
+        return (
+            self.highlight_top3(color='orangered')
+            .combine_first(self.color_quantile(color='khaki'))
+        )
+
+
 
