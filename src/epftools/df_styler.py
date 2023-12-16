@@ -29,7 +29,7 @@ class DataFrameStyler:
         """Applies default styling based on top 3 and quantile."""
         u = self.df.index.get_level_values(0)
         cols = self.df.columns
-        styled_df = self.highlight_top3(color='orangered', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=1)
-        styled_df = styled_df.apply(self.color_quantile, color='khaki', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=1)
+        styled_df = self.style.apply(highlight_top3,color='orangered',subset = pd.IndexSlice[u[:-1], cols[:-1]],axis=1) \
+            .apply(color_quantile,color='khaki',subset = pd.IndexSlice[u[:-1], cols[:-1]],axis=1) 
         return styled_df
 
