@@ -33,13 +33,13 @@ class DataFrameStyler:
         return [attr if v else '' for v in is_in_quantile_4]
 
     @staticmethod
-    def get_styled_default(df):
+    def get_styled_default(df,axis=1):
         u = df.index.get_level_values(0)
         cols = df.columns
         df_styled = df.style.apply(
-            DataFrameStyler.highlight_top3, color='orangered', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=1
+            DataFrameStyler.highlight_top3, color='orangered', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=axis
         ).apply(
-            DataFrameStyler.color_quantile, color='khaki', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=1
+            DataFrameStyler.color_quantile, color='khaki', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=axis
         )
         return df_styled
 
