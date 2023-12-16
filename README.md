@@ -176,3 +176,32 @@ wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
 pdf_generator = PDFGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_path)
 pdf_generator.generate_pdf(elements,html=False)
 ```
+
+## Using DataFrameStyler and PDFGenerator2(wkhtmltopdf -windows)
+
+```python
+import pandas as pd
+from epftools import  ClaimProcessor, PDFGenerator, PDFGenerator2, DataFrameStyler
+#from df_styler import DataFrameStyler
+
+
+df = pd.read_csv('data/claims.csv')
+processor = ClaimProcessor(15, 20)
+df = processor.add_bins_and_categories(df)
+df1 = processor.get_flat_pivot(df, "days_Group", "GROUP")
+df2 = processor.get_flat_pivot(df, "STATUS", "GROUP")
+
+df1_styled = DataFrameStyler.get_styled_default(df1)
+df2_styled = DataFrameStyler.get_styled_default(df2)
+
+
+elements=[df1_styled.to_html(), df2_styled.to_html()]
+
+
+# Example usage:
+html_template_path = 'data/template.html'
+output_pdf_path = 'data/out1.pdf'
+wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+pdf_generator = PDFGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_path)
+pdf_generator.generate_pdf(elements,html=False)
+```
