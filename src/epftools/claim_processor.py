@@ -138,6 +138,7 @@ class ClaimProcessor:
         df1 = pd.pivot_table(df, values='ID', index=[INDEX], columns=[COLUMN], 
                              margins=True, aggfunc='count').fillna(0).astype(int)
         df1.columns = df1.columns.to_series().apply(''.join)
+        print(df1.columns.astype(str).str.join(''))
         df1 = df1.rename_axis(None, axis=1)  
         df1 = df1.rename_axis(None, axis=0)
         return df1
