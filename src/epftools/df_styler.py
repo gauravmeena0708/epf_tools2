@@ -1,42 +1,42 @@
 import pandas as pd
-import numpy as np
 
 class DataFrameStyler:
     def __init__(self, df):
         self.df = df
 
-    def highlight_min(self, color='green'):
-        is_min = self.df == self.df.min()
+    def highlight_min(self, s, color='green'):
+        is_max = s == s.min()
         attr = 'background-color: {}'.format(color)
-        return pd.DataFrame(np.where(is_min, attr, ''), index=self.df.index, columns=self.df.columns)
+        return [attr if v else '' for v in is_max]
 
-    def highlight_max(self, color='yellow'):
-        is_max = self.df == self.df.max()
+    def highlight_max(self, s, color='yellow'):
+        is_max = s == s.max()
         attr = 'background-color: {}'.format(color)
-        return pd.DataFrame(np.where(is_max, attr, ''), index=self.df.index, columns=self.df.columns)
+        return [attr if v else '' for v in is_max]
 
-    def highlight_top3(self, color='darkorange'):
-        top3_values = self.df.stack().nlargest(3).index
-        is_top3 = self.df.index.isin(top3_values.get_level_values(0))
+    def highlight_top3(self, s, color='darkorange'):
+        top3_values = s.nlargest(3).index
+        is_top3 = s.index.isin(top3_values)
         attr = 'color: {};font-weight: bold;'.format(color)
-        return pd.DataFrame(np.where(is_top3[:, None], attr, ''), index=self.df.index, columns=self.df.columns)
+        return [attr if v else '' for v in is_top3]
 
-    def conditional_color(self, cutoff=100, color='red'):
-        is_above_cutoff = self.df > cutoff
-        color = 'color: {};'.format(color)
-        return pd.DataFrame(np.where(is_above_cutoff, color, ''), index=self.df.index, columns=self.df.columns)
+    def conditional_color(self, val, cutoff=100, color='red'):
+        color = color if val > cutoff else "black"
+        return f"color: {color}"
 
-    def color_quantile(self, color='red'):
-        quantile_4_threshold = self.df.quantile(0.75)
-        is_in_quantile_4 = self.df >= quantile_4_threshold
+    def color_quantile(self, s, color='red'):
+        quantile_4_threshold = s.quantile(0.75)
+        is_in_quantile_4 = s >= quantile_4_threshold
         attr = 'background-color: {}'.format(color)
-        return pd.DataFrame(np.where(is_in_quantile_4, attr, ''), index=self.df.index, columns=self.df.columns)
+        return [attr if v else '' for v in is_in_quantile_4]
 
     def get_styled_default(self):
-        return (
-            self.highlight_top3(color='orangered')
-            .combine_first(self.color_quantile(color='khaki'))
+        u = self.df.index.get_level_values(0)
+        cols = self.df.columns
+        df_styled = self.df.style.apply(
+            self.highlight_top3, color='orangered', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=1
+        ).apply(
+            self.color_quantile, color='khaki', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=1
         )
-
-
+        return df_styled
 
