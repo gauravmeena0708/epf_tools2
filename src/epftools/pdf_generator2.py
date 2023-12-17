@@ -42,9 +42,9 @@ class PDFGenerator2:
         table_html = ""
         for i, df in enumerate(dataframes):
             if html:
-                table_html = table_html+ "<br/>" + df.to_html(classes=self.classes) + ""
+                table_html = table_html+ "" + df.to_html(classes=self.classes) + ""
             else:
-                table_html = table_html+ "<br/>" + df + ""
+                table_html = table_html+ "" + df + ""
         html_content = self.template % (table_html)
         modified_html = self.modify_html(html_content)
         html_filename = 'tmp.html'
