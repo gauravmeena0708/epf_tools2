@@ -185,23 +185,29 @@ from epftools import  ClaimProcessor, PDFGenerator, PDFGenerator2, DataFrameStyl
 #from df_styler import DataFrameStyler
 
 
-df = pd.read_csv('data/claims.csv')
-processor = ClaimProcessor(15, 20)
+df = pd.read_csv('data/claims_17_12_23.csv')
+title = "<span style='background:grey;padding:2px 10px;'>{}</span>"
+processor = ClaimProcessor(10, 20)
 df = processor.add_bins_and_categories(df)
-df1 = processor.get_flat_pivot(df, "days_Group", "GROUP")
-df2 = processor.get_flat_pivot(df, "STATUS", "GROUP")
-
-df1_styled = DataFrameStyler.get_styled_default(df1)
-df2_styled = DataFrameStyler.get_styled_default(df2)
-
-
-elements=[df1_styled.to_html(), df2_styled.to_html()]
-
+display(df.head())
+print(df['STATUS2'].unique())
+elements = []
+elements.append(title.format('All claims'))
+elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df, ["days_Group"], ["GROUP"])).to_html())
+elements.append(title.format('All claims at DA level'))
+elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[df['STATUS']=="DA"], ["days_Group"], ["GROUP"])).to_html())
+elements.append(title.format('All claims at Approver level'))
+elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[df['STATUS']=="App"], ["days_Group"], ["GROUP"])).to_html())
+elements.append(title.format('All claims at Other>20days'))
+elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS'] == "Other") & (df["days_Group"] == '>20')], ["STATUS2"], ["GROUP"])).to_html())
+elements.append(title.format('>10days claim task id wise'))
+elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS'] == "DA") & (df["PENDING DAYS"] >10)], ["TASK"], ["days_Group"]),axis=0).to_html())
 
 # Example usage:
 html_template_path = 'data/template.html'
-output_pdf_path = 'data/out1.pdf'
-wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+output_pdf_path = 'data/out.pdf'
+wkhtmltopdf_path = r'path to wkhtmltopdf.exe'
 pdf_generator = PDFGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_path)
 pdf_generator.generate_pdf(elements,html=False)
+
 ```
