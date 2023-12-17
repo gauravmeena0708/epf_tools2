@@ -28,7 +28,7 @@ class DataFrameStyler:
     @staticmethod
     def color_quantile(s, color='red'):
         quantile_4_threshold = s.quantile(0.75)
-        is_in_quantile_4 = s >= quantile_4_threshold
+        is_in_quantile_4 = (s >= quantile_4_threshold & s>0)
         attr = 'background-color: {}'.format(color)
         return [attr if v else '' for v in is_in_quantile_4]
 
