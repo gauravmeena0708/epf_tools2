@@ -74,7 +74,8 @@ class ClaimProcessor:
         'Form-31 [ 68J / Illness ]'                       : 'Form-31',
         'Form-31 [ COVID ]'                               : 'Form-31',
         'Form-13 (Transfer Out) [ WITHOUT-MONEY  ]'       : 'FORM-13',
-        'Form-10C [ Scheme Certificate ]'                 : '10C'
+        'Form-10C [ Scheme Certificate ]'                 : '10C',
+        'Form-14 (Funding of LIP)'                        : 'FORM-14'
     }
     
     INT_MAPPING  = {
@@ -91,7 +92,8 @@ class ClaimProcessor:
         'Form-31 [ 68J / Illness ]'                       : 'Non_int',
         'Form-31 [ COVID ]'                               : 'Non_int',
         'Form-13 (Transfer Out) [ WITHOUT-MONEY  ]'       : 'Int',
-        'Form-10C [ Scheme Certificate ]'                 : 'Non_int'
+        'Form-10C [ Scheme Certificate ]'                 : 'Non_int',
+        'Form-14 (Funding of LIP)'                        : 'Non_int'
     }
 
     COLUMNS  = ['CLAIM ID', 'TASK ID', 'PENDING DAYS', 'STATUS', 'CLAIM TYPE']
