@@ -222,3 +222,39 @@ pdf_generator.generate_pdf(elements,html=False)
 
 
 ```
+
+## Generate pdf from a folder of images
+
+```python
+import os
+import re
+import base64
+from epftools import ClaimProcessor, PDFGenerator, PDFGenerator2
+from glob import glob
+
+matching_files = glob(os.path.join("./data/", "figure_*.png"))
+print(matching_files)
+def get_image_file_as_base64_data(file_path):
+    with open(file_path, 'rb') as image_file:
+        return base64.b64encode(image_file.read()).decode()
+
+
+def generate_html_elements(matching_files):
+    elements=[]
+    image_elements = map(lambda f: f'<img src="data:;base64,{get_image_file_as_base64_data(f)}">', matching_files)
+    elements.extend(list(image_elements))
+
+    return elements
+
+
+
+
+html_template_path = 'data/template.html'
+output_pdf_path = 'data/out.pdf'
+wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+    
+elements = generate_html_elements(matching_files)
+    
+pdf_generator = PDFGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_path)
+pdf_generator.generate_pdf(elements, html=False)
+```
