@@ -140,16 +140,20 @@ class ClaimProcessor:
         else:
             if claim_type == "Death Clm":
                 category = f"{claim_type}"
-            elif claim_type == "Int":
+            elif days != self.days_labels[0]:
+                category = f"{status} >10 days"
+            else:
+                category = "Other"  # status
+            """elif claim_type == "Int":
                 if days != self.days_labels[0]:
-                    category = f"{status}"# {claim_type} >{self.cut_off1}"
+                    category = f"{status} {claim_type} >{self.cut_off1}"
                 else:
                     category = "Other"  # status
             else:
                 if days == self.days_labels[2]:
-                    category = f"{status}"# {claim_type} >{self.cut_off2}"
+                    category = f"{status} {claim_type} >{self.cut_off2}"
                 else:
-                    category = "Other"  # status
+                    category = "Other"  # status"""
 
         return category
 
