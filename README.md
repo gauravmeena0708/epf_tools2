@@ -206,12 +206,17 @@ elements.append(title.format('All claims at Other>20days'))
 elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS3'] == "Other") & (df["days_Group"] == '>20')], ["STATUS2"], ["GROUP"])).to_html())
 elements.append(title.format('Claims based on category'))
 elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df, ["CATEGORY"], ["GROUP"])).to_html())
+elements.append(title.format('Claims at Pension'))
+elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[df['STATUS2'] == "Pension"], ["STATUS"], ["days_Group"]),axis=0).to_html())
 elements.append(title.format('Death Claims >7days'))
 elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['INT_CATEGORY'] == "Death Clm") & (df["PENDING DAYS"] > 7)], ["TASK"], ["STATUS2"]),axis=0).to_html())
+elements.append('<div style = "display:block; clear:both; page-break-after:always;"></div>')
 elements.append(title.format('>10days claim task id wise at DA level'))
 elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS3'] == "DA") & (df["PENDING DAYS"] >10)], ["TASK"], ["days_Group"]),axis=0).to_html())
-elements.append(title.format('>10days claim task id wise at DA level'))
+elements.append('<div style = "display:block; clear:both; page-break-after:always;"></div>')
+elements.append(title.format('>10days claim task id wise at DA level(int,non-interest, death)'))
 elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS3'] == "DA") & (df["PENDING DAYS"] >10)], ["TASK"], ["CATEGORY"]),axis=0).to_html())
+
 info(df)
 # Example usage:
 html_template_path = 'data/template.html'
@@ -219,6 +224,8 @@ output_pdf_path = 'data/out.pdf'
 wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
 pdf_generator = PDFGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_path)
 pdf_generator.generate_pdf(elements,html=False)
+
+
 
 
 
