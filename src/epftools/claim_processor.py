@@ -129,7 +129,7 @@ class ClaimProcessor:
     
     def assign_categories(self, row):
         days = row["days_Group"]
-        status = row["STATUS"]
+        status = row["STATUS3"]
         claim_type = row["INT_CATEGORY"]
 
         if status == "Other":
