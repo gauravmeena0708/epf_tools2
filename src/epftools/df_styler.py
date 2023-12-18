@@ -37,7 +37,7 @@ class DataFrameStyler:
         u = df.index.get_level_values(0)
         cols = df.columns
         df_styled = df.style.apply(
-            DataFrameStyler.highlight_top3, color='orangered', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=axis
+            DataFrameStyler.highlight_top3, color='darkred', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=axis
         ).apply(
             DataFrameStyler.color_quantile, color='khaki', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=axis
         )
