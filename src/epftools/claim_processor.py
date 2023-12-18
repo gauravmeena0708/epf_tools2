@@ -49,15 +49,15 @@ class ClaimProcessor:
         'Pending [ Approver Pending ]'                    : 'App',
 
         'Pending at DA Pension [SC generation]'           : 'Pension',
-        'Pending [ Referred to Other Office ]'            : 'Pension',
         'Pending at DA Pension [Worksheet Generation]'    : 'Pension',
         'Pending at DA Pension [PPO Generation]'          : 'Pension',
         'Pending at DA Pension [SC worksheet generation]' : 'Pension',
-        'Pending at E-Sign'                               : 'Pension',
+        'Pending at AC Pension [SC generation]'           : 'Pension',
         'Pending at AC Pension [Worksheet Generation]'    : 'Pension',
         'Pending at AC Pension [PPO Generation]'          : 'Pension',
         'Pending at DA Pension [SC verification awaited]' : 'Pension',
-        'Pending at AC Pension [SC generation]'           : 'Pension',
+        'Pending [ Referred to Other Office ]'            : 'Pension',
+        'Pending at E-Sign'                               : 'Pension',
         'Pending at Invalid Status'                       : 'Other/Invalid'
     }
     
