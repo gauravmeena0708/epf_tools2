@@ -142,12 +142,12 @@ class ClaimProcessor:
                 category = f"{claim_type}"
             elif claim_type == "Int":
                 if days != self.days_labels[0]:
-                    category = f"{status} {claim_type} >{self.cut_off1}"
+                    category = f"{status}"# {claim_type} >{self.cut_off1}"
                 else:
                     category = "Other"  # status
             else:
                 if days == self.days_labels[2]:
-                    category = f"{status} {claim_type} >{self.cut_off2}"
+                    category = f"{status}"# {claim_type} >{self.cut_off2}"
                 else:
                     category = "Other"  # status
 
