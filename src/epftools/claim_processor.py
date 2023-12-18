@@ -32,6 +32,7 @@ class ClaimProcessor:
         'Pending at DA Pension [SC verification awaited]' : 'Other',
         'Pending at Invalid Status'                       : 'Other',
         'Pending at AC Pension [SC generation]'           : 'Other',
+        'Pending at DA Pension [SC generation]'           : 'Other'
     }
     
     STATUS_MAPPING2  = {
