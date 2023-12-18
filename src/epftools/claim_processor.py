@@ -48,6 +48,8 @@ class ClaimProcessor:
         'Pending at SS/AO/AC Accounts'                    : 'App',
         'Pending [ Approver Pending ]'                    : 'App',
 
+        'Pending at DA Pension [SC generation]'           : 'Pension',
+        'Pending [ Referred to Other Office ]'            : 'Pension',
         'Pending at DA Pension [Worksheet Generation]'    : 'Pension',
         'Pending at DA Pension [PPO Generation]'          : 'Pension',
         'Pending at DA Pension [SC worksheet generation]' : 'Pension',
@@ -56,8 +58,7 @@ class ClaimProcessor:
         'Pending at AC Pension [PPO Generation]'          : 'Pension',
         'Pending at DA Pension [SC verification awaited]' : 'Pension',
         'Pending at AC Pension [SC generation]'           : 'Pension',
-        'Pending at Invalid Status'                       : 'Other/Invalid',
-        'Pending [ Referred to Other Office ]'            : 'Other/Invalid',
+        'Pending at Invalid Status'                       : 'Other/Invalid'
     }
     
     CLAIM_TYPE_MAPPING  = {
