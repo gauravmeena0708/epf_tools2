@@ -185,7 +185,7 @@ from epftools import  ClaimProcessor, PDFGenerator, PDFGenerator2, DataFrameStyl
 #from df_styler import DataFrameStyler
 
 
-df = pd.read_csv('data/claims_17_12_23.csv')
+df = pd.read_csv('data/claims_18_12_23.csv')
 title = "<span style='background:grey;padding:2px 10px;'>{}</span>"
 processor = ClaimProcessor(10, 20)
 df = processor.add_bins_and_categories(df)
@@ -199,19 +199,19 @@ elements = []
 elements.append(title.format('All claims'))
 elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df, ["days_Group"], ["GROUP"])).to_html())
 elements.append(title.format('All claims at DA level'))
-elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[df['STATUS']=="DA"], ["days_Group"], ["GROUP"])).to_html())
+elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[df['STATUS3']=="DA"], ["days_Group"], ["GROUP"])).to_html())
 elements.append(title.format('All claims at Approver level'))
-elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[df['STATUS']=="App"], ["days_Group"], ["GROUP"])).to_html())
+elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[df['STATUS3']=="App"], ["days_Group"], ["GROUP"])).to_html())
 elements.append(title.format('All claims at Other>20days'))
-elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS'] == "Other") & (df["days_Group"] == '>20')], ["STATUS2"], ["GROUP"])).to_html())
+elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS3'] == "Other") & (df["days_Group"] == '>20')], ["STATUS2"], ["GROUP"])).to_html())
 elements.append(title.format('Claims based on category'))
 elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df, ["CATEGORY"], ["GROUP"])).to_html())
 elements.append(title.format('Death Claims >7days'))
 elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['INT_CATEGORY'] == "Death Clm") & (df["PENDING DAYS"] > 7)], ["TASK"], ["STATUS2"]),axis=0).to_html())
 elements.append(title.format('>10days claim task id wise at DA level'))
-elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS'] == "DA") & (df["PENDING DAYS"] >10)], ["TASK"], ["days_Group"]),axis=0).to_html())
+elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS3'] == "DA") & (df["PENDING DAYS"] >10)], ["TASK"], ["days_Group"]),axis=0).to_html())
 elements.append(title.format('>10days claim task id wise at DA level'))
-elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS'] == "DA") & (df["PENDING DAYS"] >10)], ["TASK"], ["CATEGORY"]),axis=0).to_html())
+elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS3'] == "DA") & (df["PENDING DAYS"] >10)], ["TASK"], ["CATEGORY"]),axis=0).to_html())
 info(df)
 # Example usage:
 html_template_path = 'data/template.html'
@@ -219,6 +219,7 @@ output_pdf_path = 'data/out.pdf'
 wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
 pdf_generator = PDFGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_path)
 pdf_generator.generate_pdf(elements,html=False)
+
 
 
 ```

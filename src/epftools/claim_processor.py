@@ -156,7 +156,7 @@ class ClaimProcessor:
         df = self.filter_and_rename_columns(df)
         df['GROUP'] = [int(str(x)[:3]) for x in df['TASK']]
         df['STATUS2'] = df['STATUS'].replace(self.status_mapping2)
-        df['STATUS'] = df['STATUS'].replace(self.status_mapping)
+        df['STATUS3'] = df['STATUS'].replace(self.status_mapping)
         df['INT_CATEGORY'] = df['CLAIM TYPE'].replace(self.int_mapping)
         df['CLAIM TYPE'] = df['CLAIM TYPE'].replace(self.claim_type_mapping)
         df['days_Group'] = pd.cut(df['PENDING DAYS'], self.days_bins, labels=self.days_labels)
