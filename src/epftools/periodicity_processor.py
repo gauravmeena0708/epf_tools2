@@ -206,8 +206,14 @@ class PeriodicityProcessor:
         return normal_table
 
 """
-# Example usage:
-path23 = 'your_file_path_here.csv'
+from epftools import PeriodicityProcessor
+path = '2022.csv'
 processor = PeriodicityProcessor(path, '2023-10')
 dall = processor.df
+dall.head()
+death10d = dall[dall['FORM_NAME']=="Death-10D"]
+display(len(death10d))
+display(death10d)
+df2 = processor.col_grouped_rejection(dall,"GROUP_ID")
+display(df2.head())
 """
