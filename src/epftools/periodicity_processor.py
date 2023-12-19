@@ -177,6 +177,33 @@ class PeriodicityProcessor:
         df.loc[df['TOTAL_AMOUNT'].between(500000, 2499999, 'both'), 'cat'] = '5lakh-25lakh'
         df.loc[df['TOTAL_AMOUNT'].ge(2500000), 'cat'] = '>=25lakh'
         return df
+    
+    @staticmethod
+    def col_grouped_rejection(df, filter_col):
+        df['rejected'] = df.groupby(['month',filter_col ])['outcome'].transform(lambda x: (x == 'rejected').sum())
+        df['settled'] = df.groupby(['month', filter_col])['outcome'].transform(lambda x: (x == 'settled').sum())
+        df['total'] = df.groupby(['month', filter_col])['outcome'].transform('count')
+        df['Rejected_Ratio'] = round(df['rejected']*100 / df['total'], 2)
+        pivot_table = df.pivot_table(index=filter_col, columns='month', values='Rejected_Ratio', fill_value=0)
+        pivot_table = pivot_table.round(2)
+        for index, row in pivot_table.iterrows():
+            form_name = index
+
+            # Calculate the 'total', 'settled', and 'rejected' counts for this 'FORM_NAME'
+            total_count = df[df[filter_col] == form_name]['total'].count()
+            settled_count = df[(df[filter_col] == form_name) & (df['outcome'] == 'settled')]['settled'].count()
+            rejected_count = df[(df[filter_col] == form_name) & (df['outcome'] =='rejected')]['rejected'].count()
+
+            # Update the pivot table with the calculated values
+            pivot_table.at[index, 'rejected'] = int(rejected_count)
+            pivot_table.at[index, 'settled'] = int(settled_count)
+            pivot_table.at[index, 'total'] = int(total_count)
+            pivot_table.at[index, 'overall_ratio'] = round(int(rejected_count)*100/int(total_count),2)
+
+
+            normal_table = pivot_table.reset_index()
+
+        return normal_table
 
 """
 # Example usage:
