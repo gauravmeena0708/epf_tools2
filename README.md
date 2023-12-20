@@ -230,11 +230,6 @@ pdf_generator = PDFGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_p
 pdf_generator.generate_pdf(elements,html=False)
 
 
-
-
-
-
-
 ```
 
 ## Generate pdf from a folder of images
@@ -271,4 +266,14 @@ elements = generate_html_elements(matching_files)
     
 pdf_generator = PDFGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_path)
 pdf_generator.generate_pdf(elements, html=False)
+```
+
+## PDF Split
+
+```python
+from epftools import  PDFTools as pt
+input_path = "in.pdf"
+output_path_template = "output_{0}_{1}.pdf"
+page_ranges = [(1, 1), (2, 2), (3, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 11), (12, 12), (13, 13), (14, 14), (15, 15), (16, 16), (17, 17), (18, 18)]
+pt.split_pdf(input_path, output_path_template, page_ranges)
 ```
