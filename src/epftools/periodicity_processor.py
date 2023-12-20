@@ -3,7 +3,7 @@ import numpy as np
 from datetime import datetime
 import plotly.express as px
 
-pd.options.mode.copy_on_write = True
+#pd.options.mode.copy_on_write = True
 
 FORM_NAME_MAPPING = {
     'Form-31': '31',
