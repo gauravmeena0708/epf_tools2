@@ -8,3 +8,4 @@ from .df_styler import *
 from .periodicity_processor import *
 from .pdf_tools import *
 from .excel_merger import *
+from .pdf_ocr import *
