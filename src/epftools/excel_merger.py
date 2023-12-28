@@ -4,10 +4,11 @@ import pandas as pd
 class ExcelMerger:
     def __init__(self, folder_path, ext=".xlsx", sheetnum=0):
         self.folder_path = folder_path
+        self.ext    = ext
         self.excel_names = self.get_excel_files()
         self.excels = self.load_excels()
         self.frames = self.extract_frames()
-        self.ext    = ext
+        
         self.sheet_num = 0
 
     def get_excel_files(self):
