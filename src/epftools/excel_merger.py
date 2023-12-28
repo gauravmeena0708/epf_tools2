@@ -10,6 +10,7 @@ class ExcelMerger:
 
     def get_excel_files(self):
         excel_names = [filename for filename in os.listdir(self.folder_path) if filename.endswith('.xls')]
+        print(excel_names)
         return excel_names
 
     def load_excels(self):
