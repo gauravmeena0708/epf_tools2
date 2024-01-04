@@ -8,7 +8,7 @@ This is an alpha repo for EPF analysis tools
 ## install
 
 ```bash
-pip install -e git+https://github.com/gauravmeena0708/epf_tools2#egg=epftools2
+pip install -e git+https://github.com/gauravmeena0708/epftools#egg=epftools
 ```
 
 ### Example Use: Generating bins and categories and flat pivot
