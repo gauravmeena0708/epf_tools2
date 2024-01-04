@@ -155,8 +155,8 @@ class PeriodicityProcessor:
         df['weekday'] = df['SETTLED_REJECT_DATE'].dt.day_name()
         df['mday'] = df['SETTLED_REJECT_DATE'].dt.day
         df['yday'] = df['SETTLED_REJECT_DATE'].dt.dayofyear
-        df['TASK_ID'] = df['TASK_ID'].astype("category")
-        df['GROUP_ID'] = df['GROUP_ID'].astype("category")
+        df['TASK_ID'] = df['TASK_ID'].astype("int").astype("category")
+        df['GROUP_ID'] = df['GROUP_ID'].astype("int").astype("category")
         df['FORM_NAME'] = df['FORM_NAME'].astype("category")
         df['PARA_DETAILS'] = df['PARA_DETAILS'].astype("category")
         df['dt'] = pd.to_datetime(df['SETTLED_REJECT_DATE']).dt.date
