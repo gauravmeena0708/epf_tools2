@@ -4,10 +4,10 @@ with open('README.md', 'r', encoding='utf-8') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='EPFtools2',
+    name='epftools',
     author='gaurav meena',
     author_email='gauravmeena0708@gmail.com',
-    description='Example PyPI (Python Package Index) Package',
+    description='epftools (Python Package Index) Package',
     keywords='example, pypi, package',
     long_description=long_description,
     long_description_content_type='text/markdown',
