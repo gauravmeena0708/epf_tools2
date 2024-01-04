@@ -1,4 +1,4 @@
-from os import listdir, mkdir, startfile
+from os import listdir, mkdir
 from os.path import isfile, join, exists
 from PyPDF2 import PdfWriter
 import pytesseract
