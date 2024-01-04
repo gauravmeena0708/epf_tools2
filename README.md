@@ -277,3 +277,12 @@ output_path_template = "output_{0}_{1}.pdf"
 page_ranges = [(1, 1), (2, 2), (3, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 11), (12, 12), (13, 13), (14, 14), (15, 15), (16, 16), (17, 17), (18, 18)]
 pt.split_pdf(input_path, output_path_template, page_ranges)
 ```
+
+## Excel Merge
+
+```python
+from epftools import  ExcelMerger
+folder_path = './/due2//'
+merger = ExcelMerger(folder_path,ext=".xls")
+merger.merge_and_save()
+```
