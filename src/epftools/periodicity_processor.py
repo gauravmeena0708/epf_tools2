@@ -58,7 +58,7 @@ PARA_DETAILS_MAPPING = {
     'nan': 'Not Available',
     'Payment of Accumulations in the case of Beneficiary charged with the offense of Murder of the deceased member ': 'Advance - ChargedWithMurder',
     'Payment of LIP Premium': 'Advance - LIP',
-    np.nan: 'Death - '
+    np.nan: 'Death-20'
 }
 
 PARA_DETAILS_MAPPING1 = {
