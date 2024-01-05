@@ -31,6 +31,7 @@ PARA_DETAILS_MAPPING = {
     'Transfer (Unexempted to Unexempted in other region or to Exempted Establishments)': 'Transfer',
     'Transfer (Unexempted to Unexempted in the same region (office)': 'Transfer',
     'Transfer (Unexempted to Unexempted in same region (office)':'Transfer',
+    'Transfer (Unexempted to Unexempted in same region (office) ':'Transfer',
     'Monthly Pension - Member': 'Pension - 10D',
     'Resign': 'Final - 19',
     'ADVANCE FOR CONTINUOUS UNEMPLOYMENT FOR ABOVE ONE MONTH': 'Advance - Unemployment 1M',
