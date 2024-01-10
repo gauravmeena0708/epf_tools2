@@ -286,3 +286,30 @@ folder_path = './/due2//'
 merger = ExcelMerger(folder_path,ext=".xls")
 merger.merge_and_save()
 ```
+
+## Periodicity analysis
+
+```python
+
+!pip install -e git+https://github.com/gauravmeena0708/epftools#egg=epftools
+!pip install epftools
+!pip install reportlab pdfkit PyPDF2 pytesseract pdf2image
+
+from epftools import PeriodicityProcessor
+import pandas as pd
+
+path24 = '<path>'
+processor = PeriodicityProcessor(path24, '2023-12')
+dall = processor.df
+dall.head()
+dall2 = pd.DataFrame(columns=['text_column', 'blank', 'reason1', 'reason2', 'reason_category'])
+dall2[['blank', 'reason1', 'reason2']] = dall['REJECT_REASON'].str.split(r'\d\)', n=2, expand=True)
+
+dall['reason1'] = dall2['reason1'].str.strip()
+dall['reason2'] = dall2['reason2'].str.strip()
+death10d = dall[dall['FORM_NAME']=="Death-10D"]
+display(len(death10d))
+display(death10d.head())
+df2 = processor.col_grouped_rejection(dall,"GROUP_ID")
+
+```
