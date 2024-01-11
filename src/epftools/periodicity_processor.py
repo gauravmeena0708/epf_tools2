@@ -152,7 +152,7 @@ def get_financial_year_quarter(date):
 
 class PeriodicityProcessor:
     @staticmethod
-    def read_periodicity(df, fname, year):
+    def read_periodicity(fname, year):
         df = pd.read_csv(fname, encoding='latin1')  # encoding = 'unicode_escape'
         df['RECEIPT_DATE'] = pd.to_datetime(df['RECEIPT_DATE'])
         df.dropna(subset=['SETTLED_REJECT_DATE'], how='all', inplace=True)
