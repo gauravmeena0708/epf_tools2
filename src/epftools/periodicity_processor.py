@@ -6,22 +6,22 @@ import plotly.express as px
 #pd.options.mode.copy_on_write = True
 
 FORM_NAME_MAPPING = {
-    'Form-31': '31',
-    'Form-31 [ COVID-2 ]': '31',
-    'Form-31 [ COVID ]': '31',
-    'Form-31 [ 68J / Illness ]': '31',
-    'Form-13 (Transfer Out) [ WITHOUT-MONEY  ]': '13',
-    'Form-13 (Transfer Out) [ OTHERS ]': '13',
-    'Form-10D': '10D',
-    'Form-19': '19',
-    'Form-10C [ Withdrawal Benefit ] ': '10C',
-    'Form-13 (Transfer Out) [ WITH-MONEY ]': '13',
-    'Form-10D [ Death Case ]': 'Death-10D',
-    'Form-10C [ Scheme Certificate ]': '10C',
-    'Form-5IF': 'Death-5IF',
-    'Form-20': 'Death-20',
-    'Form-13 (Transfer In / Same Office)': '13',
-    'Form-14 (Funding of LIP)': '14'
+    'Form-13 (Transfer Out) [ WITHOUT-MONEY  ]':'13 - WOM',
+    'Form-10C [ Withdrawal Benefit ] ':'10C - WB',
+    'Form-31 [ 68J / Illness ]':'31 - Illness',
+    'Form-13 (Transfer Out) [ WITH-MONEY ]':'13 - WM',
+    'Form-19':'19',
+    'Form-13 (Transfer Out) [ OTHERS ]':'13 - Ot',
+    'Form-31':'31',
+    'Form-31 [ COVID-2 ]':'31 - COV1',
+    'Form-31 [ COVID ]':'31 - COV2',
+    'Form-10D':'10D',
+    'Form-20':'Death-20',
+    'Form-5IF':'Death-5IF',
+    'Form-13 (Transfer In / Same Office)':'13 - In',
+    'Form-10D [ Death Case ]':'Death-10D',
+    'Form-10C [ Scheme Certificate ]':'10C - SC',
+    'Form-14 (Funding of LIP)':'14'
 }
 
 PARA_DETAILS_MAPPING = {
