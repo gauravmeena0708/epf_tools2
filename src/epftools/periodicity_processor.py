@@ -6,22 +6,22 @@ import plotly.express as px
 #pd.options.mode.copy_on_write = True
 
 FORM_NAME_MAPPING = {
-    'Form-31': '31',
-    'Form-31 [ COVID-2 ]': '31',
-    'Form-31 [ COVID ]': '31',
-    'Form-31 [ 68J / Illness ]': '31',
-    'Form-13 (Transfer Out) [ WITHOUT-MONEY  ]': '13',
-    'Form-13 (Transfer Out) [ OTHERS ]': '13',
-    'Form-10D': '10D',
-    'Form-19': '19',
-    'Form-10C [ Withdrawal Benefit ] ': '10C',
-    'Form-13 (Transfer Out) [ WITH-MONEY ]': '13',
-    'Form-10D [ Death Case ]': 'Death-10D',
-    'Form-10C [ Scheme Certificate ]': '10C',
-    'Form-5IF': 'Death-5IF',
-    'Form-20': 'Death-20',
-    'Form-13 (Transfer In / Same Office)': '13',
-    'Form-14 (Funding of LIP)': '14'
+    'Form-31'                                  : '31',
+    'Form-31 [ COVID-2 ]'                      : '31 - cov2',
+    'Form-31 [ COVID ]'                        : '31 - cov',
+    'Form-31 [ 68J / Illness ]'                : '31 - ill',
+    'Form-13 (Transfer Out) [ WITHOUT-MONEY  ]': '13 - wom',
+    'Form-13 (Transfer Out) [ OTHERS ]'        : '13 - ot',
+    'Form-13 (Transfer Out) [ WITH-MONEY ]'    : '13 - wm',
+    'Form-13 (Transfer In / Same Office)'      : '13 - in',
+    'Form-10D'                                 : '10D',
+    'Form-19'                                  : '19',
+    'Form-10C [ Withdrawal Benefit ]'          : '10C - WB',
+    'Form-10C [ Scheme Certificate ]'          : '10C - SC',
+    'Form-10D [ Death Case ]'                  : 'Death-10D',
+    'Form-5IF'                                 : 'Death-5IF',
+    'Form-20'                                  : 'Death-20',
+    'Form-14 (Funding of LIP)'                 : '14'
 }
 
 PARA_DETAILS_MAPPING = {
@@ -158,12 +158,13 @@ class PeriodicityProcessor:
         df.dropna(subset=['SETTLED_REJECT_DATE'], how='all', inplace=True)
         df['SETTLED_REJECT_DATE'] = pd.to_datetime(df['SETTLED_REJECT_DATE'])
 
-        df['FORM_NAME'].replace(FORM_NAME_MAPPING, inplace=True)
+
+        df['FORM_NAME'] = df['FORM_NAME'].replace(FORM_NAME_MAPPING)
         df['PARA_DETAILS1'] = df['PARA_DETAILS']
         df['PARA_DETAILS2'] = df['PARA_DETAILS']
-        df['PARA_DETAILS'].replace(PARA_DETAILS_MAPPING, inplace=True)
-        df['PARA_DETAILS1'].replace(PARA_DETAILS_MAPPING1, inplace=True)
-        df['PARA_DETAILS2'].replace(PARA_DETAILS_MAPPING2, inplace=True)
+        df['PARA_DETAILS']  = df['PARA_DETAILS'].replace(PARA_DETAILS_MAPPING)
+        df['PARA_DETAILS1'] = df['PARA_DETAILS1'].replace(PARA_DETAILS_MAPPING1)
+        df['PARA_DETAILS2'] = df['PARA_DETAILS2'].replace(PARA_DETAILS_MAPPING2)
 
         df['EST'] = [str(x)[:15] for x in df['MEMBER_ID']]
         df['month'] = df['SETTLED_REJECT_DATE'].dt.month
