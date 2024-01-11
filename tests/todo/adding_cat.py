@@ -40,3 +40,5 @@ dall2['confidence'] = all2_probabilities.max(axis=1).copy()
 
 # Display the dataframe df_all2 with predicted categories and confidence
 display(dall2.head())
+cols = ["GROUP_ID","TASK_ID","EST","CLAIM_ID","PARA_DETAILS","MEMBER_ID","reason1","predicted_category","confidence"]
+dall2[(dall2['STATUS']=='Rejected') & (dall2['FORM_NAME']=='31')][cols].to_excel("december1.xlsx",index=False)
