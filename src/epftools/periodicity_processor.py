@@ -142,6 +142,13 @@ def process_row(value):
     else:
         return float(value.replace(',', ''))
 
+def get_financial_year_quarter(date):
+    if date.month >= 4:
+        return (date.month - 4) // 3 + 1
+    else:
+        return (date.month + 8) // 3
+
+
 
 class PeriodicityProcessor:
     def __init__(self, path, year):
@@ -179,6 +186,9 @@ class PeriodicityProcessor:
         df['ym'] = df['year'].astype(str) + df['month'].astype(str)
         df['md'] = df['monthn'].astype(str) + '-' + df['date'].astype(str)
         df['fy'] = year
+        # Apply the function to the datetime column to get the quarter number
+        df['quarter'] = df['SETTLED_REJECT_DATE'].apply(get_financial_year_quarter)
+
         df.loc[df['DAYS_TAKEN_FOR_REJECTION'].isnull(), 'outcome'] = 'settled'
         df.loc[df['DAYS_TAKEN_FOR_SETTLEMENT'].isnull(), 'outcome'] = 'rejected'
 
