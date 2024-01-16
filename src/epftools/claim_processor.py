@@ -178,7 +178,7 @@ class ClaimProcessor:
         df1 = df1.rename_axis(None, axis=0)
         return df1
         
-    def get_elements(self, df):
+    def get_elements(self, df, DataFrameStyler):
         title = "<span style='background:grey;padding:2px 10px;'>{}</span>"
         elements = []
         elements.append(title.format('All claims'))
