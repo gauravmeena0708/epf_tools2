@@ -177,6 +177,32 @@ class ClaimProcessor:
         df1 = df1.rename_axis(None, axis=1)  
         df1 = df1.rename_axis(None, axis=0)
         return df1
-                             
+        
+    def get_elements(self, df, processor):
+        elements = []
+        elements.append(title.format('All claims'))
+        elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df, ["days_Group"], ["GROUP"])).to_html())
+        elements.append(title.format('All claims at DA level'))
+        elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[df['STATUS3']=="DA"], ["days_Group"], ["GROUP"])).to_html())
+        elements.append(title.format('All claims at Approver level'))
+        elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[df['STATUS3']=="App"], ["days_Group"], ["GROUP"])).to_html())
+        elements.append(title.format('All claims at Other>20days'))
+        elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS3'] == "Other") & (df["days_Group"] == '>20')], ["STATUS2"], ["GROUP"])).to_html())
+        elements.append(title.format('Claims based on category'))
+        elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df, ["CATEGORY"], ["GROUP"])).to_html())
+        elements.append(title.format('Claims at Pension'))
+        elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[df['STATUS2'] == "Pension"], ["STATUS"], ["days_Group"]),axis=0).to_html())
+        elements.append(title.format('Death Claims >7days'))
+        elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['INT_CATEGORY'] == "Death Clm") & (df["PENDING DAYS"] > 7)], ["TASK"], ["STATUS2"]),axis=0).to_html())
+
+        elements.append(title.format('>15days claim Group wise at Approver level(int,non-interest, death)'))
+        elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS3'] == "App") & (df["PENDING DAYS"] >15)], ["CATEGORY"], ["GROUP"])).to_html())
+
+        elements.append('<div style = "display:block; clear:both; page-break-after:always;"></div>')
+        elements.append(title.format('>10days claim task id wise at DA level(int,non-interest, death)'))
+        elements.append(DataFrameStyler.get_styled_default(processor.get_flat_pivot(df[(df['STATUS3'] == "DA") & (df["PENDING DAYS"] >10)], ["TASK"], ["CATEGORY"]),axis=0).to_html())
+        
+        return elements
+
 
 
