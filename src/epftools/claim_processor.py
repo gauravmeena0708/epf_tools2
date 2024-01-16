@@ -179,6 +179,7 @@ class ClaimProcessor:
         return df1
         
     def get_elements(self, df):
+        title = "<span style='background:grey;padding:2px 10px;'>{}</span>"
         elements = []
         elements.append(title.format('All claims'))
         elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df, ["days_Group"], ["GROUP"])).to_html())
