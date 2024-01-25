@@ -172,6 +172,7 @@ class PeriodicityProcessor:
         df['weekday'] = df['SETTLED_REJECT_DATE'].dt.day_name()
         df['mday'] = df['SETTLED_REJECT_DATE'].dt.day
         df['yday'] = df['SETTLED_REJECT_DATE'].dt.dayofyear
+        df.dropna(subset=['TASK_ID'], inplace=True)
         df['TASK_ID'] = df['TASK_ID'].astype("int").astype("category")
         df['GROUP_ID'] = df['GROUP_ID'].astype("int").astype("category")
         df['FORM_NAME'] = df['FORM_NAME'].astype("category")
