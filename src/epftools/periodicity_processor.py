@@ -193,9 +193,9 @@ class PeriodicityProcessor:
         df.loc[df['DAYS_TAKEN_FOR_SETTLEMENT'].isnull(), 'outcome'] = 'rejected'
 
         df['TOTAL_AMOUNT'] = df['TOTAL_AMOUNT'].apply(process_row)
-
-        df.loc[df['TOTAL_AMOUNT'].between(0, 499999, 'both'), 'cat'] = '<5lakh'
-        df.loc[df['TOTAL_AMOUNT'].between(500000, 2499999, 'both'), 'cat'] = '5lakh-25lakh'
+        df.loc[df['TOTAL_AMOUNT'].between(0, 50000, 'both'), 'cat'] = '<50k'
+        df.loc[df['TOTAL_AMOUNT'].between(50001, 500000, 'both'), 'cat'] = '50k-5lakh'
+        df.loc[df['TOTAL_AMOUNT'].between(500001, 2500000, 'both'), 'cat'] = '5lakh-25lakh'
         df.loc[df['TOTAL_AMOUNT'].ge(2500000), 'cat'] = '>=25lakh'
         return df
     
