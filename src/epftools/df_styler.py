@@ -17,7 +17,7 @@ class DataFrameStyler:
     def highlight_top3(s, color='darkorange'):
         top3_values = s.nlargest(3).index
         is_top3 = s.index.isin(top3_values)
-        attr = 'color: {};font-weight: bold;'.format(color)
+        attr = 'background-color: {};font-weight: bold;'.format(color)
         return [attr if v else '' for v in is_top3]
 
     @staticmethod
@@ -36,10 +36,13 @@ class DataFrameStyler:
     def get_styled_default(df,axis=1):
         u = df.index.get_level_values(0)
         cols = df.columns
-        df_styled = df.style.apply(
+        """df_styled = df.style.apply(
             DataFrameStyler.highlight_top3, color='darkred', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=axis
         ).apply(
             DataFrameStyler.color_quantile, color='khaki', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=axis
+        )"""
+        df_styled = df.style.apply(
+            DataFrameStyler.highlight_top3, color='darkred', subset=pd.IndexSlice[u[:-1], cols[:-1]], axis=axis
         )
         return df_styled
 
