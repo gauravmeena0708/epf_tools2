@@ -191,8 +191,11 @@ class ClaimProcessor:
         elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df, ["CATEGORY"], ["GROUP"])).to_html())
         elements.append(title.format('Claims at Pension'))
         elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df[df['STATUS2'] == "3-Pension"], ["STATUS"], ["days_Group"]),axis=0).to_html())
+        elements.append(title.format('Interest bearing claims>12days'))
+        elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df[(df['INT_CATEGORY'] != "Non_int") & (df["PENDING DAYS"] > 12)], ["STATUS2"], ["GROUP"]),axis=0).to_html())
         elements.append(title.format('Death Claims >7days'))
         elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df[(df['INT_CATEGORY'] == "Death Clm") & (df["PENDING DAYS"] > 7)], ["TASK"], ["STATUS2"]),axis=0).to_html())
+       
 
         elements.append(title.format('>15days claim Group wise at Approver level(int,non-interest, death)'))
         elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df[(df['STATUS3'] == "App") & (df["PENDING DAYS"] >15)], ["CATEGORY"], ["GROUP"])).to_html())
