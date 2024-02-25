@@ -35,7 +35,7 @@ class PDFGenerator2:
         for td in soup.find_all('td'):
             td["style"] = "font-size:10px;padding:2px;text-align:center;" 
         for th in soup.find_all('th'):
-            th["style"] = "font-size:10px;padding:2px;text-align:center;"
+            th["style"] = "font-size:10px;padding:2px;text-align:left;"
         return str(soup)
 
     def generate_pdf(self, dataframes,html=True):
