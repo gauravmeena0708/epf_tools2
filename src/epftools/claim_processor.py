@@ -187,12 +187,10 @@ class ClaimProcessor:
         elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df, ["STATUS2"], ["GROUP"]).sort_index()).to_html())
         elements.append(title.format('>20 Days Claims at Each level'))
         elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df[(df["PENDING DAYS"] > 20)], ["STATUS2"], ["GROUP"]).sort_index()).to_html())
-        elements.append(title.format('All claims at Other>20days'))
-        elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df[(df['STATUS3'] == "Other") & (df["days_Group"] == '>20')], ["STATUS2"], ["GROUP"])).to_html())
         elements.append(title.format('Claims based on category'))
         elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df, ["CATEGORY"], ["GROUP"])).to_html())
         elements.append(title.format('Claims at Pension'))
-        elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df[df['STATUS2'] == "Pension"], ["STATUS"], ["days_Group"]),axis=0).to_html())
+        elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df[df['STATUS2'] == "3-Pension"], ["STATUS"], ["days_Group"]),axis=0).to_html())
         elements.append(title.format('Death Claims >7days'))
         elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df[(df['INT_CATEGORY'] == "Death Clm") & (df["PENDING DAYS"] > 7)], ["TASK"], ["STATUS2"]),axis=0).to_html())
 
