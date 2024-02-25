@@ -36,30 +36,30 @@ class ClaimProcessor:
     }
     
     STATUS_MAPPING2  = {
-        'Pending at DA Accounts'                          : 'DA',
-        'Pending at DA Accounts [EDIT]'                   : 'DA',
+        'Pending at DA Accounts'                          : '1-DA',
+        'Pending at DA Accounts [EDIT]'                   : '1-DA',
         
-        'Pending at Dispatch'                             : 'Cash/scroll/cheque',
-        'Pending at DA SCROLL'                            : 'Cash/scroll/cheque',
-        'Pending at CHEQUE Alottment/Printing'            : 'Cash/scroll/cheque',
+        'Pending at Dispatch'                             : '4-Cash/scroll/cheque',
+        'Pending at DA SCROLL'                            : '4-Cash/scroll/cheque',
+        'Pending at CHEQUE Alottment/Printing'            : '4-Cash/scroll/cheque',
         
         
-        'Pending at SS/AO/AC Accounts [Rejection]'        : 'Rejection',
+        'Pending at SS/AO/AC Accounts [Rejection]'        : '5-Rejection',
         
-        'Pending at SS/AO/AC Accounts'                    : 'App',
-        'Pending [ Approver Pending ]'                    : 'App',
+        'Pending at SS/AO/AC Accounts'                    : '2-Approver',
+        'Pending [ Approver Pending ]'                    : '2-Approver',
 
-        'Pending at DA Pension [SC generation]'           : 'Pension',
-        'Pending at DA Pension [Worksheet Generation]'    : 'Pension',
-        'Pending at DA Pension [PPO Generation]'          : 'Pension',
-        'Pending at DA Pension [SC worksheet generation]' : 'Pension',
-        'Pending at AC Pension [SC generation]'           : 'Pension',
-        'Pending at AC Pension [Worksheet Generation]'    : 'Pension',
-        'Pending at AC Pension [PPO Generation]'          : 'Pension',
-        'Pending at DA Pension [SC verification awaited]' : 'Pension',
-        'Pending [ Referred to Other Office ]'            : 'Pension',
-        'Pending at E-Sign'                               : 'Pension',
-        'Pending at Invalid Status'                       : 'Other/Invalid'
+        'Pending at DA Pension [SC generation]'           : '3-Pension',
+        'Pending at DA Pension [Worksheet Generation]'    : '3-Pension',
+        'Pending at DA Pension [PPO Generation]'          : '3-Pension',
+        'Pending at DA Pension [SC worksheet generation]' : '3-Pension',
+        'Pending at AC Pension [SC generation]'           : '3-Pension',
+        'Pending at AC Pension [Worksheet Generation]'    : '3-Pension',
+        'Pending at AC Pension [PPO Generation]'          : '3-Pension',
+        'Pending at DA Pension [SC verification awaited]' : '3-Pension',
+        'Pending [ Referred to Other Office ]'            : '3-Pension',
+        'Pending at E-Sign'                               : '3-Pension',
+        'Pending at Invalid Status'                       : '6-Other/Invalid'
     }
     
     CLAIM_TYPE_MAPPING  = {
@@ -176,6 +176,7 @@ class ClaimProcessor:
         df1.columns = df1.columns.astype(str).str.join('')
         df1 = df1.rename_axis(None, axis=1)  
         df1 = df1.rename_axis(None, axis=0)
+        df1 = df1.sort_index()
         return df1
         
     def get_elements_daily_summary(self, df, DataFrameStyler):
