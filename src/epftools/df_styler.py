@@ -16,7 +16,7 @@ class DataFrameStyler:
     @staticmethod
     def highlight_top3(s, color='darkorange'):
         top3_values = s.nlargest(3).index
-        is_top3 = s.index.isin(top3_values)
+        is_top3 = s.index.isin(top3_values) & (s > 0)
         attr = 'background-color: {};font-weight: bold;'.format(color)
         return [attr if v else '' for v in is_top3]
 
