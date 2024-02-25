@@ -176,7 +176,6 @@ class ClaimProcessor:
         df1.columns = df1.columns.astype(str).str.join('')
         df1 = df1.rename_axis(None, axis=1)  
         df1 = df1.rename_axis(None, axis=0)
-        df1 = df1.sort_index()
         return df1
         
     def get_elements_daily_summary(self, df, DataFrameStyler):
@@ -185,7 +184,7 @@ class ClaimProcessor:
         elements.append(title.format('All claims'))
         elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df, ["days_Group"], ["GROUP"])).to_html())
         elements.append(title.format('Claims at Each level(status2)'))
-        elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df, ["STATUS2"], ["GROUP"])).to_html())
+        elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df, ["STATUS2"], ["GROUP"]).sort_index()).to_html())
         elements.append(title.format('Claims at Each level(status3)'))
         elements.append(DataFrameStyler.get_styled_default(self.get_flat_pivot(df, ["STATUS3"], ["GROUP"])).to_html())
         elements.append(title.format('All claims at DA level'))
