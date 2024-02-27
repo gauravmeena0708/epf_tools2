@@ -290,3 +290,35 @@ display(death10d.head())
 df2 = processor.col_grouped_rejection(dall,"GROUP_ID")
 
 ```
+
+## For Dashboard 3 data
+
+```python
+
+#!pip install -e git+https://github.com/gauravmeena0708/epf_tools2#egg=epftools2
+import pandas as pd
+from epftools import  ClaimProcessor, PDFGenerator, PDFGenerator2, DataFrameStyler
+
+df = pd.read_csv('data/claims_06_02_24.csv')
+COLUMNS  = ['CLAIM ID', 'TASK ID', 'PENDING DAYS', 'STATUS', 'CLAIM TYPE']
+RENAME_COLS  ={
+    'CLAIM_ID':'CLAIM ID',
+    'ACC_TASK_ID':'TASK ID',
+    'STATUS':'STATUS',
+    'PEN_DAYS':'PENDING DAYS',
+    'FORM_TYPE_TEXT':'CLAIM TYPE'
+}
+df = df.rename(columns=RENAME_COLS)
+processor = ClaimProcessor(10, 20)
+df = processor.add_bins_and_categories(df)
+
+
+elements = processor.get_elements_daily_summary(df, DataFrameStyler)
+# Example usage:
+html_template_path = 'data/template.html'
+output_pdf_path = 'data/report_06_02_24.pdf'
+wkhtmltopdf_path = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+pdf_generator = PDFGenerator2(html_template_path, output_pdf_path, wkhtmltopdf_path)
+pdf_generator.generate_pdf(elements,html=False)
+
+```
