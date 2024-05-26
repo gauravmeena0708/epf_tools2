@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import json
-import xlsxwriter
+from datetime import datetime
 
 # URLs
 INITIAL_URL = 'https://www.epfindia.gov.in/site_en/circulars.php'
@@ -31,6 +31,18 @@ def parse_rows(rows, year=''):
         row_data[2] = hindi_url
         row_data[3] = english_url
         row_data.append(year)
+        
+        # Check if the last 10 characters of row_data[1] are in dd/mm/yyyy format
+        if len(row_data[1]) >= 10 and row_data[1][-10:].count('/') == 2:
+            try:
+                date_str = row_data[1][-10:]
+                date_obj = datetime.strptime(date_str, '%d/%m/%Y')
+                formatted_date = date_obj.strftime('%Y-%m-%d')
+                row_data.append(formatted_date)
+            except ValueError:
+                row_data.append('Invalid Date')
+        else:
+            row_data.append('No Date')
 
         parsed_rows.append(row_data)
 
@@ -63,6 +75,7 @@ soup = bs(response.text, 'html.parser')
 table = soup.find('table')
 headers = [header.text.strip() for header in table.find_all('th')]
 headers.append('Year')
+headers.append('Date')
 
 # Parse initial table rows
 initial_rows = table.find_all('tr', class_='small_font')[1:]
