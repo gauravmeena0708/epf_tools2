@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 import json
 from datetime import datetime
+import xlsxwriter
 
 # URLs
 INITIAL_URL = 'https://www.epfindia.gov.in/site_en/circulars.php'
